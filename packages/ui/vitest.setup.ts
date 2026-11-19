@@ -3,6 +3,11 @@ import * as matchers from 'vitest-axe/matchers'
 
 expect.extend(matchers)
 
+// jsdom lacks pointer capture and scrollIntoView, which Reka's Select calls.
+Element.prototype.hasPointerCapture ??= () => false
+Element.prototype.releasePointerCapture ??= () => {}
+Element.prototype.scrollIntoView ??= () => {}
+
 // jsdom lacks ResizeObserver, which Reka UI's positioning (floating-ui) uses.
 globalThis.ResizeObserver ??= class {
   observe() {}

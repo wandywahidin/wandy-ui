@@ -28,6 +28,10 @@ export default tseslint.config(
       'vue/html-indent': 'off',
       'vue/html-closing-bracket-newline': 'off',
       'vue/multiline-html-element-content-newline': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },
+      ],
       // Library primitives are single words by design (Button, Tabs, ...).
       'vue/multi-word-component-names': 'off',
       // `ui` / `class` are optional by design.
