@@ -1,0 +1,34 @@
+{
+  "name": "docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens": "pnpm --filter @wandy/tokens build",
+    "storybook": "pnpm tokens && storybook dev -p 6006",
+    "build-storybook": "pnpm tokens && storybook build -o storybook-static",
+    "test-storybook": "pnpm tokens && vitest run",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint .storybook"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "10.6.7",
+    "@storybook/addon-docs": "10.6.7",
+    "@storybook/addon-vitest": "10.6.7",
+    "@storybook/vue3-vite": "10.6.7",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "22.20.5",
+    "@vitejs/plugin-vue": "6.0.11",
+    "@vitest/browser": "5.1.1",
+    "@vitest/browser-playwright": "5.1.1",
+    "@wandy/tokens": "workspace:*",
+    "@wandy/ui": "workspace:*",
+    "playwright": "1.65.1",
+    "storybook": "10.6.7",
+    "tailwindcss": "4.3.5",
+    "typescript": "6.0.3",
+    "vite": "8.3.8",
+    "vitest": "5.1.1",
+    "vue": "3.5.45",
+    "vue-tsc": "3.3.14"
+  }
+}

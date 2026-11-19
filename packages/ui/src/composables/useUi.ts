@@ -5,11 +5,11 @@ import { cn, type ClassValue } from '../utils/cn'
 
 export interface UseUiOptions<S extends string> {
   /** Per-call slot overrides (the component's `ui` prop). */
-  ui?: () => UiOverrides<S> | undefined
+  ui?: () => UiOverrides<NoInfer<S>> | undefined
   /** Consumer `class` attr; merged into the root slot last. */
   class?: () => unknown
   /** The slot that receives `class`. */
-  root: S
+  root: NoInfer<S>
 }
 
 /**
