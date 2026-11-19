@@ -17,6 +17,11 @@ export default tseslint.config(
     },
   },
   {
+    // Tests define throwaway apps/components inline.
+    files: ['**/*.test.ts'],
+    rules: { 'vue/one-component-per-file': 'off' },
+  },
+  {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
     },

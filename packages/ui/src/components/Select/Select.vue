@@ -33,6 +33,9 @@ export interface SelectProps {
   id?: string
   disabled?: boolean
   invalid?: boolean
+  /** Form field name. When set, a hidden native `<select>` submits the value with its form. */
+  name?: string
+  autocomplete?: string
   ui?: UiOverrides<SelectSlot>
 }
 
@@ -70,7 +73,13 @@ const classes = useUi<SelectSlot>(
 </script>
 
 <template>
-  <SelectRoot v-model="model" :disabled="!!control.disabled" :required="!!control.required">
+  <SelectRoot
+    v-model="model"
+    :name="name"
+    :autocomplete="autocomplete"
+    :disabled="!!control.disabled"
+    :required="!!control.required"
+  >
     <SelectTrigger v-bind="triggerAttrs" :class="classes.trigger">
       <SelectValue :placeholder="placeholder" :class="classes.value" />
       <SelectIcon as-child>

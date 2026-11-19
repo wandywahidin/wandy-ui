@@ -49,7 +49,7 @@ function toggle() {
       type="button"
       role="switch"
       :aria-checked="model"
-      :aria-labelledby="slots.default ? labelId : undefined"
+      :aria-labelledby="slots.default ? labelId : (attrs['aria-labelledby'] as string | undefined)"
       :class="classes.track"
       @click="toggle"
     >

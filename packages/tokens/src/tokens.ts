@@ -39,7 +39,8 @@ export const tokens: Tokens = {
     foreground: '#18181b',
     muted: '#f4f4f5',
     'muted-foreground': '#52525b',
-    border: '#d4d4d8',
+    // ≥3:1 on background/surface (WCAG 1.4.11): it draws control boundaries.
+    border: '#85858e',
     ring: '#4f46e5',
     primary: '#4f46e5',
     'primary-foreground': '#ffffff',
@@ -56,7 +57,7 @@ export const tokens: Tokens = {
     foreground: '#fafafa',
     muted: '#27272a',
     'muted-foreground': '#a1a1aa',
-    border: '#3f3f46',
+    border: '#71717a',
     ring: '#818cf8',
     primary: '#818cf8',
     'primary-foreground': '#1e1b4b',

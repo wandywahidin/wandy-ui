@@ -16,6 +16,7 @@ export * from './components/Tooltip'
 
 // Customization core
 export { createUI, UI_CONFIG_KEY } from './plugin'
+export { WandyUI, components, type WandyUIOptions } from './install'
 export { useUi, type UseUiOptions } from './composables/useUi'
 export { cn, type ClassValue } from './utils/cn'
 export type { ComponentName, UiOverrides, UIConfig } from './types'

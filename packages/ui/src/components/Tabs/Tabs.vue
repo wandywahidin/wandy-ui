@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, provide, shallowReactive, toRef, useAttrs, useId } from 'vue'
+import { computed, provide, shallowReactive, toRef, useAttrs, useId, watch } from 'vue'
 import { useUi } from '../../composables/useUi'
 import type { UiOverrides } from '../../types'
 import { TABS_KEY } from './context'
@@ -23,11 +23,22 @@ defineSlots<{ default?(): unknown }>()
 
 const attrs = useAttrs()
 const baseId = useId()
-const tabs = shallowReactive<Array<{ value: string; disabled: () => boolean }>>([])
+const tabs = shallowReactive<Array<{ value: () => string; disabled: () => boolean }>>([])
+
+const firstEnabled = computed(() => tabs.find((t) => !t.disabled())?.value())
+const active = computed(() =>
+  tabs.some((t) => t.value() === model.value) ? model.value : firstEnabled.value,
+)
+const tabbable = computed(() => {
+  const current = tabs.find((t) => t.value() === active.value)
+  return current && !current.disabled() ? active.value : firstEnabled.value
+})
 
 provide(TABS_KEY, {
   baseId,
   selected: model,
+  active,
+  tabbable,
   activation: toRef(props, 'activation'),
   orientation: toRef(props, 'orientation'),
   select: (v) => (model.value = v),
@@ -38,13 +49,15 @@ provide(TABS_KEY, {
   },
 })
 
-// Without a value, select the first enabled tab so one tab is always reachable.
-onMounted(() => {
-  if (model.value === undefined) {
-    const first = tabs.find((t) => !t.disabled())
-    if (first) model.value = first.value
-  }
-})
+// Without a value, select the first enabled tab, also when tabs arrive after
+// mount, so a tab is always selected and reachable by keyboard.
+watch(
+  firstEnabled,
+  (first) => {
+    if (model.value === undefined && first !== undefined) model.value = first
+  },
+  { immediate: true, flush: 'post' },
+)
 
 const classes = useUi('tabs', () => ({ root: tabsVariants({ orientation: props.orientation }) }), {
   ui: () => props.ui,

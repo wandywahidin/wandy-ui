@@ -20,8 +20,13 @@ const ctx = inject(TABS_KEY)
 if (!ctx) throw new Error('<Tab> must be used inside <Tabs>.')
 
 const attrs = useAttrs()
-const selected = computed(() => ctx.selected.value === props.value)
-onBeforeUnmount(ctx.register(props.value, () => props.disabled))
+const selected = computed(() => ctx.active.value === props.value)
+onBeforeUnmount(
+  ctx.register(
+    () => props.value,
+    () => props.disabled,
+  ),
+)
 
 const classes = useUi(
   'tab',
@@ -39,7 +44,7 @@ const classes = useUi(
     :data-value="value"
     :aria-selected="selected"
     :aria-controls="panelId(ctx.baseId, value)"
-    :tabindex="selected ? 0 : -1"
+    :tabindex="ctx.tabbable.value === value ? 0 : -1"
     :disabled="disabled || undefined"
     :class="classes.root"
     @click="ctx.select(value)"

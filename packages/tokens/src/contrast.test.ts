@@ -31,4 +31,13 @@ describe.each(['light', 'dark'] as const)('%s theme contrast', (mode) => {
     const ratio = contrastRatio(tokens[mode][fg], tokens[mode][bg])
     expect(ratio).toBeGreaterThanOrEqual(4.5)
   })
+
+  // WCAG 1.4.11 non-text contrast: control boundaries (checkbox, radio, input,
+  // switch track) are drawn with `border`, so it must reach 3:1 on its backgrounds.
+  it.each([
+    ['border', 'background'],
+    ['border', 'surface'],
+  ] as Array<[keyof ColorTokens, keyof ColorTokens]>)('%s on %s is at least 3:1', (fg, bg) => {
+    expect(contrastRatio(tokens[mode][fg], tokens[mode][bg])).toBeGreaterThanOrEqual(3)
+  })
 })

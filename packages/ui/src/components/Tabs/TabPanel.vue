@@ -28,7 +28,7 @@ const classes = useUi('tabPanel', () => ({ root: tabPanelVariants() }), {
 
 <template>
   <div
-    v-show="ctx.selected.value === value"
+    v-show="ctx.active.value === value"
     :id="panelId(ctx.baseId, value)"
     v-bind="{ ...attrs, class: undefined }"
     role="tabpanel"

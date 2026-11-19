@@ -72,10 +72,15 @@ app.use(createUI({ ui: { button: { root: 'rounded-full' } } }))
 ```
 
 ```css
-/* Re-brand every component */
+/* Re-brand every component: set both themes, or :root also wins in dark mode */
 :root {
   --wui-primary: #0f766e;
   --wui-ring: #0f766e;
+}
+.dark {
+  --wui-primary: #5eead4;
+  --wui-primary-foreground: #042f2e;
+  --wui-ring: #5eead4;
 }
 ```
 

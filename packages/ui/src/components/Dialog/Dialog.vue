@@ -36,8 +36,11 @@ const slots = defineSlots<{ trigger?(): unknown; default?(): unknown; footer?():
 
 const attrs = useAttrs()
 // Reka links aria-describedby to DialogDescription; without one, opt out
-// explicitly so the attribute never points at a missing element.
-const noDescription = computed(() => (props.description ? {} : { 'aria-describedby': undefined }))
+// explicitly so the attribute never points at a missing element. A consumer's
+// own aria-describedby (pointing at their element) is kept.
+const noDescription = computed(() =>
+  props.description ? {} : { 'aria-describedby': attrs['aria-describedby'] as string | undefined },
+)
 
 // `class` and other attrs go to the content panel (the dialog element).
 const classes = useUi<DialogSlot>(

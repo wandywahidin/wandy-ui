@@ -24,10 +24,17 @@ There are five layers, from coarse to fine. Reach for the coarsest one that does
   --wui-primary: #0f766e;
   --wui-ring: #0f766e;
 }
+.dark {
+  --wui-primary: #5eead4;
+  --wui-primary-foreground: #042f2e;
+  --wui-ring: #5eead4;
+}
 @theme {
   --radius-md: 0.125rem;
 }
 ```
+
+Override `.dark` too whenever you override `:root`. Both selectors have the same specificity, so a later `:root` rule also wins in dark mode.
 
 Colors are runtime variables (`--wui-*`), so they can also change per subtree or at runtime. Radius and font are Tailwind theme values, so override them in `@theme`.
 

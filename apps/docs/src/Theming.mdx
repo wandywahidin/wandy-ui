@@ -21,7 +21,7 @@ Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `
 | `foreground`                     | `text-foreground`                    | `#18181b`             | `#fafafa`             | body text                    |
 | `muted`                          | `bg-muted`                           | `#f4f4f5`             | `#27272a`             | hover fills, neutral badges  |
 | `muted-foreground`               | `text-muted-foreground`              | `#52525b`             | `#a1a1aa`             | descriptions, placeholders   |
-| `border`                         | `border-border`                      | `#d4d4d8`             | `#3f3f46`             | control borders, dividers    |
+| `border`                         | `border-border`                      | `#85858e`             | `#71717a`             | control borders, dividers    |
 | `ring`                           | `outline-ring`                       | `#4f46e5`             | `#818cf8`             | focus rings                  |
 | `primary` / `primary-foreground` | `bg-primary text-primary-foreground` | `#4f46e5` / `#ffffff` | `#818cf8` / `#1e1b4b` | primary actions              |
 | `danger` / `danger-foreground`   | `bg-danger`                          | `#dc2626` / `#ffffff` | `#f87171` / `#450a0a` | destructive actions, errors  |
@@ -43,6 +43,8 @@ Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `
 
 - foreground on background, foreground on surface, muted-foreground on surface
 - each `*-foreground` on its color (primary, danger, success, warning)
+
+It also checks that `border` reaches **3:1** on background and surface (WCAG 1.4.11, non-text contrast), since it draws the boundary of checkboxes, radios, inputs, and the off switch.
 
 ## Re-theming
 

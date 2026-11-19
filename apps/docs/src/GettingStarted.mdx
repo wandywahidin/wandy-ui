@@ -45,6 +45,16 @@ createApp(App).use(createUI()).mount('#app')
 
 `createUI()` is optional; components work without it. It's where app-wide class defaults go (see **Customization**).
 
+To register every component globally instead of importing them, use `WandyUI`. It takes the same config, plus an optional name `prefix`:
+
+```ts
+import { WandyUI } from '@wandy/ui'
+
+app.use(WandyUI, { prefix: 'W' }) // <WButton>, <WDialog>, …
+```
+
+Named imports tree-shake; global registration ships every component.
+
 ## Use a component
 
 ```vue

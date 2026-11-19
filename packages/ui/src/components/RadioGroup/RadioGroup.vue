@@ -28,7 +28,16 @@ const attrs = useAttrs()
 const field = useFieldContext()
 const control = useFieldControl({ disabled: props.disabled })
 const ownLabelId = useId()
-const labelledBy = computed(() => (field ? field.labelId : props.label ? ownLabelId : undefined))
+// Explicit bindings below override `v-bind="attrs"` even when undefined, so
+// fall back to the consumer's own ARIA attrs instead of wiping them.
+const labelledBy = computed(
+  () =>
+    (field ? field.labelId : props.label ? ownLabelId : undefined) ??
+    (attrs['aria-labelledby'] as string | undefined),
+)
+const describedBy = computed(
+  () => control.value['aria-describedby'] ?? (attrs['aria-describedby'] as string | undefined),
+)
 const groupDisabled = computed(() => props.disabled || !!control.value.disabled)
 
 const root = ref<HTMLElement>()
@@ -79,7 +88,7 @@ const classes = useUi(
     v-bind="{ ...attrs, class: undefined }"
     role="radiogroup"
     :aria-labelledby="labelledBy"
-    :aria-describedby="control['aria-describedby']"
+    :aria-describedby="describedBy"
     :aria-invalid="control['aria-invalid']"
     :aria-required="control.required || undefined"
     :aria-disabled="groupDisabled || undefined"

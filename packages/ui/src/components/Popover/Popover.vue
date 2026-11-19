@@ -41,7 +41,7 @@ const classes = useUi(
         :align="align"
         :side-offset="8"
         :collision-padding="8"
-        :aria-label="label"
+        :aria-label="label ?? (attrs['aria-label'] as string | undefined)"
         :class="classes.content"
       >
         <slot />
