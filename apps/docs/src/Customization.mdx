@@ -1,0 +1,120 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Customization" />
+
+# Customization
+
+There are five layers, from coarse to fine. Reach for the coarsest one that does the job.
+
+| Layer                           | Scope                         | Use it to                                               |
+| ------------------------------- | ----------------------------- | ------------------------------------------------------- |
+| 1. Tokens                       | every component, whole app    | change brand colors, radius, font                       |
+| 2. Variants (`extend`)          | your own variant classes      | build new sizes or intents from the shipped definitions |
+| 3. `ui` prop and `class`        | one call site                 | tweak one instance                                      |
+| 4. Global defaults (`createUI`) | every instance of a component | set house style without touching call sites             |
+| 5. Vue slots                    | markup of one part            | swap icons, labels, footers                             |
+
+**Priority order:** component default < global default < `ui` prop / `class`. Classes merge with [tailwind-merge](https://github.com/dcastil/tailwind-merge), so a later layer's `rounded-full` _replaces_ an earlier `rounded-md` instead of fighting it in CSS order. You never need `!important`.
+
+## 1. Tokens
+
+```css
+/* after @import "@wandy/tokens/theme.css" */
+:root {
+  --wui-primary: #0f766e;
+  --wui-ring: #0f766e;
+}
+@theme {
+  --radius-md: 0.125rem;
+}
+```
+
+Colors are runtime variables (`--wui-*`), so they can also change per subtree or at runtime. Radius and font are Tailwind theme values, so override them in `@theme`.
+
+See **Theming** for the full token list.
+
+## 2. Variants with `extend`
+
+Every component exports its [tailwind-variants](https://www.tailwind-variants.org) definition (`buttonVariants`, `badgeVariants`, and so on). Extend it to get classes that stay consistent with the library, then apply them through `ui` or `class`:
+
+```ts
+// brand.ts
+import { tv } from 'tailwind-variants'
+import { buttonVariants } from '@wandy/ui'
+
+export const heroButton = tv({
+  extend: buttonVariants,
+  variants: {
+    size: { xl: { root: 'h-14 px-8 text-lg' } },
+  },
+})
+```
+
+```vue
+<Button :ui="{ root: heroButton({ size: 'xl' }).root() }">Get started</Button>
+```
+
+## 3. The `ui` prop and `class`
+
+Every component has named parts (slots). `ui` takes a class string per part. `class` always targets the component's root part (listed in each component's **Docs** tab), and every other attribute goes to the element it belongs on, for example `placeholder` goes to the native `<input>`.
+
+```vue
+<Dialog
+  title="Invite"
+  :ui="{ content: 'max-w-xl', title: 'text-primary', footer: 'justify-between' }"
+/>
+
+<Button class="bg-success text-success-foreground hover:bg-success/90">Saved</Button>
+```
+
+`class="bg-red-500"` removes the variant's `bg-*` class, but not `hover:bg-*`, which is a separate utility. Pass the hover class too, as above, when you change a color.
+
+## 4. Global defaults
+
+```ts
+import { createUI } from '@wandy/ui'
+
+app.use(
+  createUI({
+    ui: {
+      button: { root: 'rounded-full' },
+      input: { root: 'rounded-full' },
+      dialog: { overlay: 'backdrop-blur-sm' },
+    },
+  }),
+)
+```
+
+Keys are component names (`button`, `iconButton`, `field`, `input`, `textarea`, `checkbox`, `radioGroup`, `radio`, `switch`, `tabs`, `tabList`, `tab`, `tabPanel`, `badge`, `spinner`, `dialog`, `popover`, `tooltip`, `select`) and values are part → classes. A `ui` prop at the call site still wins.
+
+## 5. Slots
+
+When classes aren't enough, replace markup:
+
+```vue
+<Button>
+  <template #leading><PlusIcon class="size-4" /></template>
+  New project
+</Button>
+
+<Input v-model="price">
+  <template #prefix>$</template>
+  <template #suffix>USD</template>
+</Input>
+
+<Dialog v-model:open="open" title="Delete project">
+  <template #trigger><Button intent="danger">Delete</Button></template>
+  This cannot be undone.
+  <template #footer><Button intent="danger" @click="remove">Delete</Button></template>
+</Dialog>
+```
+
+## Building your own controls
+
+`useUi`, `cn`, `useFieldControl`, and `useRovingFocus` are exported, so a custom control can join the same system: it can merge classes the same way, pick up a surrounding `Field`'s ids and error state, and get roving arrow-key focus.
+
+```ts
+import { useFieldControl, useUi } from '@wandy/ui'
+
+const control = useFieldControl(props) // { id, 'aria-describedby'?, 'aria-invalid'?, disabled?, required? }
+```

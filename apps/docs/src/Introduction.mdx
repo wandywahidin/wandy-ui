@@ -5,3 +5,30 @@ import { Meta } from '@storybook/addon-docs/blocks'
 # @wandy/ui
 
 Accessible, customizable Vue 3.5 components styled with Tailwind CSS v4.
+
+`@wandy/ui` is a small component library built as a frontend foundation: design tokens, component APIs you can restyle without fighting them, accessibility that is tested rather than claimed, and disciplined semver releases.
+
+## What's inside
+
+| Component                        | Built with                     | Pattern                                        |
+| -------------------------------- | ------------------------------ | ---------------------------------------------- |
+| Button, IconButton               | hand-built                     | native `<button>`                              |
+| Field, Input, Textarea           | hand-built                     | label / description / error wiring             |
+| Checkbox                         | hand-built                     | native checkbox, indeterminate                 |
+| RadioGroup                       | hand-built                     | WAI-ARIA radio group, roving tabindex          |
+| Switch                           | hand-built                     | WAI-ARIA switch                                |
+| Tabs                             | hand-built                     | WAI-ARIA tabs, automatic and manual activation |
+| Badge, Spinner                   | hand-built                     | static / `role="status"`                       |
+| Dialog, Popover, Tooltip, Select | [Reka UI](https://reka-ui.com) | focus trap, portals, positioning, typeahead    |
+
+Components with an ARIA pattern small enough to own end-to-end are written here. Components that need focus trapping, collision-aware positioning, or typeahead wrap Reka UI. ADR 0001 records why.
+
+## Where to go next
+
+- **Getting Started**: install, CSS setup, and your first component.
+- **Theming**: the token table and dark mode.
+- **Customization**: the five layers, from tokens down to slots.
+- **Accessibility**: how each component is tested, and what stays your responsibility.
+- **Versioning**: what a 0.x release promises.
+
+Every component page has an **Accessibility** section with the pattern it follows and a keyboard table. The **Docs** tab lists props, and **Controls** lets you try the `ui` prop live.

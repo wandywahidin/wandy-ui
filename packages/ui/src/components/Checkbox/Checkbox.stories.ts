@@ -7,6 +7,14 @@ import { Field } from '../Field'
 const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A binary choice with an optional indeterminate ("mixed") state.\n\n## Accessibility\n\n**Pattern:** native `<input type="checkbox">` ([WAI-ARIA checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)), visually restyled. The default slot is the label, and the whole row is a `<label>`, so clicking the text toggles it. `v-model="\'indeterminate\'"` sets the DOM `indeterminate` property, which assistive tech reports as "mixed"; activating it makes it checked.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the checkbox |\n| Space | Toggles it |\n\n**Your responsibility**\n\n- Give each checkbox a label via the default slot.\n- For a group of checkboxes, wrap them in a `<fieldset>` with a `<legend>`.\n- You own the logic that sets a "select all" parent to indeterminate.',
+      },
+    },
+  },
   argTypes: {
     ui: {
       control: 'object',

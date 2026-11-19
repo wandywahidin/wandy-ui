@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Getting Started" />
+
+# Getting Started
+
+## Requirements
+
+- Vue `^3.5`
+- Tailwind CSS `^4` (v3 is not supported: the theme is a Tailwind v4 `@theme` block)
+- Reka UI `^2.11` (used by Dialog, Popover, Tooltip, and Select)
+
+## Install
+
+```sh
+pnpm add @wandy/ui @wandy/tokens reka-ui
+# if your app doesn't have them yet:
+pnpm add vue tailwindcss @tailwindcss/vite
+```
+
+## Add the CSS
+
+In your app's main stylesheet (for example `src/style.css`):
+
+```css
+@import "tailwindcss";
+@import "@wandy/tokens/theme.css";
+@source "../node_modules/@wandy/ui/src";
+```
+
+- `@wandy/tokens/theme.css` defines the color, radius, and font tokens and maps them to Tailwind utilities such as `bg-primary`.
+- `@source` tells Tailwind to scan the component source for class names. The path is relative to this CSS file, so adjust it if your stylesheet sits deeper than `src/`.
+
+## Install the plugin
+
+```ts
+// src/main.ts
+import { createApp } from 'vue'
+import { createUI } from '@wandy/ui'
+import App from './App.vue'
+import './style.css'
+
+createApp(App).use(createUI()).mount('#app')
+```
+
+`createUI()` is optional; components work without it. It's where app-wide class defaults go (see **Customization**).
+
+## Use a component
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { Button, Field, Input } from '@wandy/ui'
+
+const email = ref('')
+</script>
+
+<template>
+  <form class="flex max-w-sm flex-col gap-4" @submit.prevent>
+    <Field label="Email" description="We never share your email.">
+      <Input v-model="email" type="email" />
+    </Field>
+    <Button type="submit">Subscribe</Button>
+  </form>
+</template>
+```
+
+Components are named exports, so bundlers drop the ones you don't import.
+
+## Dark mode
+
+Add the `dark` class to `<html>` (or any ancestor). Every token switches, and Tailwind's `dark:` variant follows the same class.
+
+```ts
+document.documentElement.classList.toggle('dark', prefersDark)
+```

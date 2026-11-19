@@ -6,6 +6,14 @@ import { Textarea } from './index'
 const meta = {
   title: 'Components/Textarea',
   component: Textarea,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A multi-line text input.\n\n## Accessibility\n\n**Pattern:** native `<textarea>`. Every attribute, `class` included, goes to the `<textarea>`. It wires into Field exactly like Input.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the textarea |\n| Enter | Inserts a new line |\n\n**Your responsibility**\n\n- Label it via `Field` or `aria-label`.\n- If you enforce a length limit, say so in the description.',
+      },
+    },
+  },
   argTypes: {
     ui: {
       control: 'object',

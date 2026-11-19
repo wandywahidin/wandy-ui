@@ -8,6 +8,14 @@ import { Textarea } from '../Textarea'
 const meta = {
   title: 'Components/Field',
   component: Field,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Labels a form control and links its description and error message.\n\n## Accessibility\n\n**Pattern:** native `<label for>` plus `aria-describedby`. Field provides ids to the control inside it (Input, Textarea, Checkbox, Switch, RadioGroup, Select). `aria-describedby` lists only the description and error that are actually rendered, so it never points at missing ids. Setting `error` sets `aria-invalid="true"` on the control. The error is plain text, not `role="alert"`, so it\'s read once on focus instead of announced twice. The required `*` is `aria-hidden`; the control gets the native `required` attribute.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the control (clicking the label also focuses it) |\n\n**Your responsibility**\n\n- Put exactly one control inside a Field.\n- Write error messages that say how to fix the problem ("Enter an email like name@example.com").\n- If you show errors only after submit, move focus to the first invalid field yourself.',
+      },
+    },
+  },
   args: { label: 'Email', description: 'We never share your email.' },
   argTypes: {
     ui: {

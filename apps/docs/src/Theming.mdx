@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Theming" />
+
+# Theming
+
+`@wandy/tokens` generates `theme.css` from a typed source (`packages/tokens/src/tokens.ts`). It has three parts:
+
+1. `:root { --wui-*: … }`: light values.
+2. `.dark { --wui-*: … }`: dark values.
+3. `@theme inline { --color-*: var(--wui-*) }`: Tailwind utilities that read the runtime variables.
+
+Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `border-border`), never raw palette colors. That's why one token change restyles every component.
+
+## Color tokens
+
+| Token                            | Utility examples                     | Light                 | Dark                  | Used for                     |
+| -------------------------------- | ------------------------------------ | --------------------- | --------------------- | ---------------------------- |
+| `background`                     | `bg-background`                      | `#ffffff`             | `#09090b`             | page and control backgrounds |
+| `surface`                        | `bg-surface`                         | `#fafafa`             | `#18181b`             | dialogs, popovers, menus     |
+| `foreground`                     | `text-foreground`                    | `#18181b`             | `#fafafa`             | body text                    |
+| `muted`                          | `bg-muted`                           | `#f4f4f5`             | `#27272a`             | hover fills, neutral badges  |
+| `muted-foreground`               | `text-muted-foreground`              | `#52525b`             | `#a1a1aa`             | descriptions, placeholders   |
+| `border`                         | `border-border`                      | `#d4d4d8`             | `#3f3f46`             | control borders, dividers    |
+| `ring`                           | `outline-ring`                       | `#4f46e5`             | `#818cf8`             | focus rings                  |
+| `primary` / `primary-foreground` | `bg-primary text-primary-foreground` | `#4f46e5` / `#ffffff` | `#818cf8` / `#1e1b4b` | primary actions              |
+| `danger` / `danger-foreground`   | `bg-danger`                          | `#dc2626` / `#ffffff` | `#f87171` / `#450a0a` | destructive actions, errors  |
+| `success` / `success-foreground` | `bg-success`                         | `#15803d` / `#ffffff` | `#4ade80` / `#052e16` | positive status              |
+| `warning` / `warning-foreground` | `bg-warning`                         | `#b45309` / `#ffffff` | `#fbbf24` / `#451a03` | caution status               |
+
+## Radius and font
+
+| Token         | Value           |
+| ------------- | --------------- |
+| `--radius-sm` | `0.25rem`       |
+| `--radius-md` | `0.5rem`        |
+| `--radius-lg` | `0.75rem`       |
+| `--font-sans` | system UI stack |
+
+## Contrast is tested
+
+`packages/tokens/src/contrast.test.ts` computes WCAG 2.x contrast ratios and fails the build if any of these pairs drops below **4.5:1**, in both light and dark:
+
+- foreground on background, foreground on surface, muted-foreground on surface
+- each `*-foreground` on its color (primary, danger, success, warning)
+
+## Re-theming
+
+Override the runtime variables after importing `theme.css`. No rebuild is needed:
+
+```css
+@import "tailwindcss";
+@import "@wandy/tokens/theme.css";
+
+:root {
+  --wui-primary: #0f766e;
+  --wui-primary-foreground: #ffffff;
+  --wui-ring: #0f766e;
+}
+.dark {
+  --wui-primary: #5eead4;
+  --wui-primary-foreground: #042f2e;
+  --wui-ring: #5eead4;
+}
+```
+
+If you change colors, re-check contrast. A quick way is to copy `tokens.ts`, edit it, and run the token tests.
+
+## Dark mode
+
+Put the `dark` class on `<html>`. `theme.css` also declares `@custom-variant dark (&:where(.dark, .dark *))`, so your own `dark:` utilities follow the same switch. Use the **Theme** toolbar button in this Storybook to preview both.

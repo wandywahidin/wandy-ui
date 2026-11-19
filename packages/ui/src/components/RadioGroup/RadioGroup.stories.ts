@@ -7,6 +7,14 @@ import { Field } from '../Field'
 const meta = {
   title: 'Components/RadioGroup',
   component: RadioGroup,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Pick exactly one option from a set.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA radio group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/): `role="radiogroup"` with `role="radio"` buttons and `aria-checked`. Roving tabindex: only the checked radio (or the first enabled one, when none is checked) is in the tab order. Arrow keys move focus **and** select, skip disabled radios, and wrap. The group is labelled by the surrounding Field\'s label or by the visually hidden `label` prop.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus into the group (to the checked radio) and out again |\n| ↓ / → | Selects the next enabled radio |\n| ↑ / ← | Selects the previous enabled radio |\n| Home / End | Selects the first / last enabled radio |\n| Space | Selects the focused radio |\n\n**Your responsibility**\n\n- Label the group: put it in a Field or pass `label`.\n- Keep radio labels short and distinct; they\'re read as "Free, radio, 1 of 3".',
+      },
+    },
+  },
   subcomponents: { Radio },
   args: { label: 'Plan', orientation: 'vertical' },
   argTypes: {

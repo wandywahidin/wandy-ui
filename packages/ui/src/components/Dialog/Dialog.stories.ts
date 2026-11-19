@@ -9,6 +9,14 @@ import { Input } from '../Input'
 const meta = {
   title: 'Components/Dialog',
   component: Dialog,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A modal window for focused tasks. Built on Reka UI.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA dialog (modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/): `role="dialog"` with `aria-modal`, labelled by its `title` and described by `description` (or by nothing, never a missing id). Focus moves into the dialog on open, is trapped while it\'s open, and returns to the trigger on close. The page behind it is hidden from assistive tech and can\'t be scrolled. The close button is an `IconButton` named by `closeLabel`.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab / Shift+Tab | Cycles focus within the dialog |\n| Escape | Closes the dialog and returns focus to the trigger |\n| Enter / Space on the trigger | Opens the dialog |\n\n**Your responsibility**\n\n- `title` is required. Make it say what the dialog is for.\n- Translate `closeLabel` for non-English apps.\n- For destructive confirmations, put the safe action first in the footer.',
+      },
+    },
+  },
   args: {
     title: 'Rename project',
     description: 'Project names appear in URLs.',

@@ -6,6 +6,14 @@ const intents = ['neutral', 'primary', 'success', 'warning', 'danger'] as const
 const meta = {
   title: 'Components/Badge',
   component: Badge,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A small status or count label.\n\n## Accessibility\n\n**Pattern:** static `<span>`, with no role or interaction. Soft and outline variants use foreground text on a tinted background so every intent meets 4.5:1 contrast.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| n/a | Not focusable |\n\n**Your responsibility**\n\n- Don\'t rely on color alone: the text has to carry the meaning ("Failed", not just red).\n- If a badge updates live (a count), announce changes yourself with a live region.',
+      },
+    },
+  },
   args: { intent: 'neutral', variant: 'soft' },
   argTypes: {
     intent: { control: 'inline-radio', options: intents },

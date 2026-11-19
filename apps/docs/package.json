@@ -23,6 +23,7 @@
     "@wandy/tokens": "workspace:*",
     "@wandy/ui": "workspace:*",
     "playwright": "1.65.1",
+    "remark-gfm": "4.0.1",
     "storybook": "10.6.7",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",

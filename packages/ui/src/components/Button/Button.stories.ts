@@ -8,6 +8,14 @@ const closeIcon =
 const meta = {
   title: 'Components/Button',
   component: Button,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Buttons trigger actions. `IconButton` is the icon-only form.\n\n## Accessibility\n\n**Pattern:** native `<button>` ([WAI-ARIA button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)). `type` defaults to `"button"` so it never submits a form by accident. `loading` sets `aria-busy="true"` and `aria-disabled="true"` but keeps the button focusable (no native `disabled`), so focus isn\'t lost mid-action; clicks and form submission are blocked while loading. `disabled` uses the native attribute.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the button |\n| Enter / Space | Activates it |\n\n**Your responsibility**\n\n- `IconButton` requires `label` (type-checked), which becomes `aria-label`. Make it describe the action ("Close dialog").\n- Icons inside `IconButton` are wrapped in `aria-hidden="true"`; don\'t add a second label.\n- If you change colors via `class`/`ui`, keep text contrast at 4.5:1 or more.',
+      },
+    },
+  },
   args: { onClick: fn(), variant: 'solid', intent: 'primary', size: 'md' },
   argTypes: {
     variant: { control: 'inline-radio', options: ['solid', 'outline', 'ghost'] },

@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Versioning" />
+
+# Versioning
+
+`@wandy/ui` and `@wandy/tokens` follow [semver](https://semver.org) and are versioned independently with [Changesets](https://github.com/changesets/changesets).
+
+## The 0.x rules
+
+The packages start at `0.1.0`. While the major version is `0`:
+
+| Bump                          | Means                                                                 | Example                                |
+| ----------------------------- | --------------------------------------------------------------------- | -------------------------------------- |
+| **minor** (`0.1.0` → `0.2.0`) | may include breaking changes, each one recorded with a migration note | renaming a prop, changing a slot name  |
+| **patch** (`0.1.0` → `0.1.1`) | bug fixes and additive, non-breaking changes only                     | fixing a focus bug, adding a `ui` part |
+
+Pin with a tilde (`~0.1.0`) to accept patches only. A caret (`^0.1.0`) behaves the same way for 0.x versions, but a tilde states the intent.
+
+`1.0.0` ships once all v1 components are complete and the API has held still for a while. From then on, breaking changes need a major bump.
+
+## What counts as public API
+
+- component names, props, emitted events, slots, and `v-model` names
+- `ui` part names (they appear in each component's **Docs** tab)
+- exported functions and types: `createUI`, `useUi`, `cn`, `useFieldControl`, `useRovingFocus`, `*Variants`
+- token names (`--wui-*` and the `--color-*` utilities)
+
+Default class strings are **not** public API. Visual polish can change in a patch. If you depend on an exact look, pin it with the `ui` prop or global defaults.
+
+## Every change carries a changeset
+
+Each PR that changes `packages/*/src` adds one:
+
+```sh
+pnpm changeset
+```
+
+Pick the packages, choose the bump, and write a line for the changelog. If the change breaks anything, the changeset **must** include a migration note:
+
+```md
+---
+'@wandy/ui': minor
+---
+
+Rename `Dialog`'s `closeText` prop to `closeLabel`.
+
+**Migration:** replace `close-text="…"` with `close-label="…"`.
+```
+
+## How releases happen
+
+1. Merging to `main` makes the Changesets bot open (or update) a **Version Packages** PR with the version bumps and changelog.
+2. Merging that PR publishes to npm and redeploys this Storybook.
+
+The changelog for each package lives at `packages/<name>/CHANGELOG.md`.

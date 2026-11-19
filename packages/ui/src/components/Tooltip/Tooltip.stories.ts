@@ -6,6 +6,14 @@ import { IconButton } from '../Button'
 const meta = {
   title: 'Components/Tooltip',
   component: Tooltip,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A short text hint on hover and focus. Built on Reka UI; needs no provider setup.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/): `role="tooltip"`, linked to the trigger with `aria-describedby`. It opens on keyboard focus right away, on hover after `delay`, and closes on Escape or blur.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Focusing the trigger shows the tooltip |\n| Escape | Hides it |\n\n**Your responsibility**\n\n- A tooltip is a *description*, not a name. The trigger still needs its own accessible name (for example `IconButton`\'s `label`).\n- Keep it to plain text. Nothing interactive goes inside a tooltip.\n- Tooltips never show on touch devices; never hide essential information in one.',
+      },
+    },
+  },
   args: { content: 'Copy link', side: 'top' },
   argTypes: {
     side: { control: 'inline-radio', options: ['top', 'right', 'bottom', 'left'] },

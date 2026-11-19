@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Accessibility" />
+
+# Accessibility
+
+"Accessible" here means **tested**. Every claim on a component page is backed by a test that runs in CI.
+
+## How it's tested
+
+| Layer                | Tool                                                                               | What it proves                                                                                                                       |
+| -------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Unit / component     | Vitest, Vue Test Utils, [vitest-axe](https://github.com/chaance/vitest-axe), jsdom | ARIA wiring (ids, `aria-describedby`, `aria-invalid`, roles, states) and axe checks for each state: default, disabled, invalid, open |
+| Keyboard interaction | Storybook play functions in real Chromium (`@storybook/addon-vitest` + Playwright) | Tab, Arrow keys, Home/End, Escape, Space/Enter behave as the WAI-ARIA pattern says                                                   |
+| Every story          | Storybook `addon-a11y`, set to **fail** on violations                              | axe passes on each rendered example, including color contrast in a real browser                                                      |
+| Tokens               | contrast unit tests                                                                | text/background token pairs are at least 4.5:1 in light and dark                                                                     |
+
+Run them locally:
+
+```sh
+pnpm test                          # unit + component tests
+pnpm --filter docs test-storybook  # play functions + a11y in Chromium
+```
+
+## Edge cases with dedicated tests
+
+- A standalone `Input` never emits an `aria-describedby` that points at ids that don't exist.
+- Two `Field`s or two `Tabs` on one page get distinct ids, so labels and panels don't cross-wire.
+- Arrow keys skip disabled radios and tabs. A group where every item is disabled doesn't loop forever or throw.
+- A `loading` Button keeps focus, doesn't emit `click`, and blocks form submission.
+- A consumer `class` beats the variant's conflicting class, regardless of CSS order.
+
+## Your responsibilities
+
+The library can't know your content. You still need to:
+
+- **Name icon-only buttons.** `IconButton` requires `label` at the type level, so write a meaningful one ("Close dialog", not "X").
+- **Label form controls.** Wrap them in `Field`, or pass `aria-label` / `aria-labelledby` when the label is visible elsewhere.
+- **Write a useful error message.** `Field`'s `error` is linked to the control. It isn't announced as an alert, so screen reader users hear it on focus, once.
+- **Keep Tooltip supplementary.** Tooltip text is a description, not a name, and it never appears on touch. Don't put essential information only in a tooltip.
+- **Give Tabs a label.** Pass `aria-label` (or `aria-labelledby`) to `TabList`.
+- **Re-check contrast if you re-theme.** The token tests cover the shipped palette, not yours.
+- **Respect motion preferences** in any animation you add; the Spinner already slows down under `prefers-reduced-motion`.

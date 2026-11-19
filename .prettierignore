@@ -3,3 +3,6 @@ storybook-static
 coverage
 pnpm-lock.yaml
 CHANGELOG.md
+# Docs prose and its code samples are hand-formatted (exact consumer CSS).
+*.md
+*.mdx

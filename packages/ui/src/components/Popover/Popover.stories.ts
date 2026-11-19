@@ -8,6 +8,14 @@ import { Checkbox } from '../Checkbox'
 const meta = {
   title: 'Components/Popover',
   component: Popover,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Non-modal floating content anchored to a trigger. Built on Reka UI.\n\n## Accessibility\n\n**Pattern:** disclosure-style popover: the trigger gets `aria-expanded`, `aria-haspopup="dialog"`, and `aria-controls`; the panel is `role="dialog"`, named by the `label` prop. Focus moves into the panel on open and returns to the trigger on Escape. Positioning flips and shifts to stay in view.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Enter / Space on the trigger | Opens or closes the popover |\n| Tab | Moves through the panel content |\n| Escape | Closes it and returns focus to the trigger |\n\n**Your responsibility**\n\n- Pass `label` so the panel has an accessible name.\n- For pure hint text, use Tooltip. For blocking tasks, use Dialog.',
+      },
+    },
+  },
   args: { side: 'bottom', align: 'center', label: 'Filters' },
   argTypes: {
     side: { control: 'inline-radio', options: ['top', 'right', 'bottom', 'left'] },

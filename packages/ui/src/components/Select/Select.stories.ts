@@ -14,6 +14,14 @@ const options = [
 const meta = {
   title: 'Components/Select',
   component: Select,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Pick one option from a list. Built on Reka UI.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA select-only combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/): the trigger is `role="combobox"` with `aria-expanded`, and the list is `role="listbox"` with `role="option"` items. Inside a Field, the trigger takes the label\'s `for` id, `aria-describedby`, and `aria-invalid`. Disabled options are skipped and can\'t be chosen. Type-ahead jumps to matching options. A hidden native `<select>` keeps form submission working.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Enter / Space / ↓ on the trigger | Opens the list |\n| ↓ / ↑ | Moves the highlight (skips disabled options) |\n| Home / End | First / last option |\n| Type characters | Jumps to the matching option |\n| Enter / Space | Selects the highlighted option and closes |\n| Escape | Closes without changing the value |\n\n**Your responsibility**\n\n- Label it with a `Field` (or `aria-label`).\n- For long lists you need to search, a combobox with filtering is a better fit.',
+      },
+    },
+  },
   args: { options, placeholder: 'Select…' },
   argTypes: {
     ui: {

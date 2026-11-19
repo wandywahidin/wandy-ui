@@ -2,6 +2,13 @@
   "name": "@wandy/tokens",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Design tokens and Tailwind v4 theme.css for @wandy/ui",
   "exports": {
     "./theme.css": "./dist/theme.css",

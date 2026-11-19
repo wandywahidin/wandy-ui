@@ -1,15 +1,13 @@
-﻿import { fileURLToPath } from 'node:url'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import { playwright } from '@vitest/browser-playwright'
-import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
 
 const dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // Runs every story as a test in real Chromium: play functions + addon-a11y checks.
+// storybookTest applies .storybook/main.ts viteFinal (Vue SFC + Tailwind plugins).
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
   test: {
     projects: [
       {

@@ -6,6 +6,14 @@ import { Tab, TabList, TabPanel, Tabs } from './index'
 const meta = {
   title: 'Components/Tabs',
   component: Tabs,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Switch between related panels without leaving the page.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/): `role="tablist"`, `role="tab"` with `aria-selected` and `aria-controls`, and `role="tabpanel"` with `aria-labelledby`. Ids come from `useId()`, so several Tabs on one page never collide. Roving tabindex: only the selected tab is tabbable. **Automatic** activation selects on arrow; **manual** only moves focus, and Enter/Space selects. Inactive panels stay in the DOM but are hidden (`v-show`). With no value, the first enabled tab is selected.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the selected tab, then into the active panel |\n| → / ← (horizontal), ↓ / ↑ (vertical) | Next / previous enabled tab (wraps); selects it in automatic mode |\n| Home / End | First / last enabled tab |\n| Enter / Space | Selects the focused tab (manual mode) |\n\n**Your responsibility**\n\n- Label the tablist with `aria-label` or `aria-labelledby` on `TabList`.\n- Use manual activation when showing a panel is slow (it fetches data).',
+      },
+    },
+  },
   subcomponents: { TabList, Tab, TabPanel },
   args: { activation: 'automatic', orientation: 'horizontal' },
   argTypes: {
