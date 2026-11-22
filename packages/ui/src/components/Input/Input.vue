@@ -24,7 +24,7 @@ const model = defineModel<string>()
 const slots = defineSlots<{ prefix?(): unknown; suffix?(): unknown }>()
 
 const attrs = useAttrs()
-const control = useFieldControl(props)
+const control = useFieldControl(props, attrs)
 const rest = computed(() => ({ ...attrs, class: undefined }))
 
 const classes = useUi(

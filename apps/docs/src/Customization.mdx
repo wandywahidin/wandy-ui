@@ -58,8 +58,16 @@ export const heroButton = tv({
 ```
 
 ```vue
-<Button :ui="{ root: heroButton({ size: 'xl' }).root() }">Get started</Button>
+<Button
+  variant="outline"
+  intent="neutral"
+  :ui="{ root: heroButton({ size: 'xl', variant: 'outline', intent: 'neutral' }).root() }"
+>
+  Get started
+</Button>
 ```
+
+Pass the same `variant` and `intent` to the extended definition that you pass to the Button. `.root()` returns the full class list for those variants, so leaving them out applies the default solid/primary colors on top of your outline button.
 
 ## 3. The `ui` prop and `class`
 

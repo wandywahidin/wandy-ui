@@ -86,6 +86,17 @@ describe('Dialog', () => {
     expect(ref_ === null || document.getElementById(ref_) !== null).toBe(true)
   })
 
+  it('backdrop is a dark scrim in both themes (not the inverting foreground color)', async () => {
+    const { trigger } = setup()
+    trigger().click()
+    await settle()
+    const overlay = [...document.body.querySelectorAll<HTMLElement>('[data-state="open"]')].find(
+      (el) => el.getAttribute('role') !== 'dialog' && el.className.includes('fixed inset-0'),
+    )!
+    expect(overlay.className).not.toMatch(/bg-foreground/)
+    expect(overlay.className).toMatch(/bg-black\/50/)
+  })
+
   it('has no axe violations while open', async () => {
     const { trigger } = setup()
     trigger().click()

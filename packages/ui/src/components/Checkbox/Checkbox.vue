@@ -11,7 +11,7 @@ export interface CheckboxProps {
   id?: string
   disabled?: boolean
   invalid?: boolean
-  ui?: UiOverrides<'root' | 'control' | 'indicator' | 'label'>
+  ui?: UiOverrides<'root' | 'box' | 'control' | 'indicator' | 'label'>
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), { disabled: false, invalid: false })
@@ -19,7 +19,7 @@ const model = defineModel<boolean | 'indeterminate'>({ default: false })
 const slots = defineSlots<{ default?(): unknown }>()
 
 const attrs = useAttrs()
-const control = useFieldControl(props)
+const control = useFieldControl(props, attrs)
 const rest = computed(() => ({ ...attrs, class: undefined }))
 const input = ref<HTMLInputElement>()
 

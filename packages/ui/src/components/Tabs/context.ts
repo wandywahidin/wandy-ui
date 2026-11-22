@@ -1,4 +1,5 @@
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { RegisteredItem } from '../../composables/useItemRegistry'
 
 export interface TabsContext {
   baseId: string
@@ -10,7 +11,7 @@ export interface TabsContext {
   activation: Ref<'automatic' | 'manual'>
   orientation: Ref<'horizontal' | 'vertical'>
   select(value: string): void
-  register(value: () => string, disabled: () => boolean): () => void
+  register(item: RegisteredItem): () => void
 }
 
 export const TABS_KEY: InjectionKey<TabsContext> = Symbol('wandy-tabs')

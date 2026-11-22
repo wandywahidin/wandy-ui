@@ -31,4 +31,11 @@ describe('buildCss', () => {
     expect(theme).toContain(`--radius-md: ${tokens.radius.md};`)
     expect(theme).toContain(`--font-sans: ${tokens.font.sans};`)
   })
+
+  it('emits shadow theme variables', () => {
+    const theme = block(css, '@theme inline')
+    for (const size of ['sm', 'md', 'lg'] as const) {
+      expect(theme).toContain(`--shadow-${size}: ${tokens.shadow[size]};`)
+    }
+  })
 })

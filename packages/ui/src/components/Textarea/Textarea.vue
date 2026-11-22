@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 const model = defineModel<string>()
 
 const attrs = useAttrs()
-const control = useFieldControl(props)
+const control = useFieldControl(props, attrs)
 const rest = computed(() => ({ ...attrs, class: undefined }))
 
 const classes = useUi('textarea', () => ({ root: textareaVariants().root() }), {

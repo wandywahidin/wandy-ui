@@ -26,6 +26,7 @@ export interface Tokens {
   dark: ColorTokens
   radius: { sm: string; md: string; lg: string }
   font: { sans: string }
+  shadow: { sm: string; md: string; lg: string }
 }
 
 /**
@@ -69,6 +70,11 @@ export const tokens: Tokens = {
     'warning-foreground': '#451a03',
   },
   radius: { sm: '0.25rem', md: '0.5rem', lg: '0.75rem' },
+  shadow: {
+    sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+    md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+  },
   font: {
     sans: "ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
   },

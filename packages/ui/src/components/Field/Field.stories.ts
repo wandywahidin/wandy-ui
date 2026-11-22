@@ -21,7 +21,7 @@ const meta = {
     ui: {
       control: 'object',
       description:
-        'Per-slot class overrides. Slots: `root` (wrapper), `label`, `description`, `error`.',
+        'Per-slot class overrides. Slots: `root` (wrapper), `label`, `required` (the `*` marker), `description`, `error`.',
     },
   },
   render: (args) => ({

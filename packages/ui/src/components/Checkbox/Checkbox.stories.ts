@@ -19,7 +19,7 @@ const meta = {
     ui: {
       control: 'object',
       description:
-        'Per-slot class overrides. Slots: `root` (the wrapping `<label>`), `control` (the native `<input type="checkbox">`), `indicator` (check/dash icon), `label` (slot text).',
+        'Per-slot class overrides. Slots: `root` (the wrapping `<label>`), `box` (the box wrapper), `control` (the native `<input type="checkbox">`), `indicator` (check/dash icon), `label` (slot text).',
     },
   },
   render: (args) => ({

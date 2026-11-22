@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, useAttrs } from 'vue'
+import { computed, inject, onBeforeUnmount, ref, useAttrs } from 'vue'
 import { useUi } from '../../composables/useUi'
 import type { UiOverrides } from '../../types'
 import { RADIO_GROUP_KEY } from './context'
@@ -22,8 +22,14 @@ if (!group) throw new Error('<Radio> must be used inside <RadioGroup>.')
 const attrs = useAttrs()
 const isDisabled = computed(() => props.disabled || group.disabled.value)
 const checked = computed(() => group.selected.value === props.value)
-const unregister = group.register(props.value, () => isDisabled.value)
-onBeforeUnmount(unregister)
+const el = ref<HTMLElement>()
+onBeforeUnmount(
+  group.register({
+    value: () => props.value,
+    disabled: () => isDisabled.value,
+    el: () => el.value,
+  }),
+)
 
 const classes = useUi(
   'radio',
@@ -41,6 +47,7 @@ function onClick() {
 
 <template>
   <button
+    ref="el"
     v-bind="{ ...attrs, class: undefined }"
     type="button"
     role="radio"

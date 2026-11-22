@@ -28,7 +28,7 @@ Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `
 | `success` / `success-foreground` | `bg-success`                         | `#15803d` / `#ffffff` | `#4ade80` / `#052e16` | positive status              |
 | `warning` / `warning-foreground` | `bg-warning`                         | `#b45309` / `#ffffff` | `#fbbf24` / `#451a03` | caution status               |
 
-## Radius and font
+## Radius, font, and shadow
 
 | Token         | Value           |
 | ------------- | --------------- |
@@ -36,6 +36,7 @@ Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `
 | `--radius-md` | `0.5rem`        |
 | `--radius-lg` | `0.75rem`       |
 | `--font-sans` | system UI stack |
+| `--shadow-sm` / `--shadow-md` / `--shadow-lg` | soft black shadows; `shadow-md` on popovers, `shadow-lg` on dialogs |
 
 ## Contrast is tested
 
@@ -43,6 +44,7 @@ Components only use semantic utilities (`bg-primary`, `text-muted-foreground`, `
 
 - foreground on background, foreground on surface, muted-foreground on surface
 - each `*-foreground` on its color (primary, danger, success, warning)
+- primary and danger text on background and surface (outline and ghost buttons, error messages)
 
 It also checks that `border` reaches **3:1** on background and surface (WCAG 1.4.11, non-text contrast), since it draws the boundary of checkboxes, radios, inputs, and the off switch.
 

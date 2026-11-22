@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAttrs } from 'vue'
+import { useAttrs, warn, watch } from 'vue'
 import { PopoverArrow, PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'reka-ui'
 import { useUi } from '../../composables/useUi'
 import type { UiOverrides } from '../../types'
@@ -20,6 +20,16 @@ const open = defineModel<boolean>('open', { default: false })
 defineSlots<{ trigger?(): unknown; default?(): unknown }>()
 
 const attrs = useAttrs()
+
+// The panel is role=dialog and needs a name. Vue's warn is a no-op in production builds.
+watch(
+  open,
+  (isOpen) => {
+    if (isOpen && !props.label && !attrs['aria-label'] && !attrs['aria-labelledby'])
+      warn('Popover: pass `label` (or aria-label / aria-labelledby) to name the panel.')
+  },
+  { immediate: true },
+)
 const classes = useUi(
   'popover',
   () => {

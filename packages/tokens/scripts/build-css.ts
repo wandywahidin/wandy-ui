@@ -18,6 +18,9 @@ export function buildCss(t: Tokens): string {
     `  --radius-md: ${t.radius.md};`,
     `  --radius-lg: ${t.radius.lg};`,
     `  --font-sans: ${t.font.sans};`,
+    `  --shadow-sm: ${t.shadow.sm};`,
+    `  --shadow-md: ${t.shadow.md};`,
+    `  --shadow-lg: ${t.shadow.lg};`,
   ].join('\n')
 
   return [

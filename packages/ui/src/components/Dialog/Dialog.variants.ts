@@ -2,7 +2,8 @@ import { tv } from 'tailwind-variants'
 
 export const dialogVariants = tv({
   slots: {
-    overlay: 'fixed inset-0 z-50 bg-foreground/40',
+    // A dark scrim in both themes (foreground would turn it white in dark mode).
+    overlay: 'fixed inset-0 z-50 bg-black/50',
     content: [
       'fixed top-1/2 left-1/2 z-50 flex max-h-[85vh] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 flex-col',
       'gap-4 overflow-y-auto rounded-lg border border-border bg-surface p-6 text-foreground shadow-lg',

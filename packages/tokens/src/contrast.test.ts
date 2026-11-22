@@ -24,6 +24,11 @@ const pairs: Array<[keyof ColorTokens, keyof ColorTokens]> = [
   ['danger-foreground', 'danger'],
   ['success-foreground', 'success'],
   ['warning-foreground', 'warning'],
+  // Colored text on the page: outline/ghost buttons, Field errors, links.
+  ['primary', 'background'],
+  ['primary', 'surface'],
+  ['danger', 'background'],
+  ['danger', 'surface'],
 ]
 
 describe.each(['light', 'dark'] as const)('%s theme contrast', (mode) => {

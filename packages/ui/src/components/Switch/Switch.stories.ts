@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'An on/off setting that applies immediately.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/): a native `<button type="button" role="switch">` with `aria-checked`. The default slot is the visible label, linked with `aria-labelledby`; clicking it toggles the switch too. Inside a Field it takes the Field\'s id, description, and error state.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the switch |\n| Space / Enter | Toggles it |\n\n**Your responsibility**\n\n- Use a Switch for settings that take effect immediately; use a Checkbox inside forms that need a submit.\n- The label should name the setting ("Wi-Fi"), not the state ("On").',
+          'An on/off setting that applies immediately.\n\n## Accessibility\n\n**Pattern:** [WAI-ARIA switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/): a native `<button type="button" role="switch">` with `aria-checked`. The default slot is the visible label, linked with `aria-labelledby`; clicking it toggles the switch too. Pass `name` (and optionally `value`, default `"on"`) and it submits like a checkbox while on. Inside a Field it takes the Field\'s id, description, and error state.\n\n**Keyboard**\n\n| Key | Action |\n| --- | --- |\n| Tab | Moves focus to the switch |\n| Space / Enter | Toggles it |\n\n**Your responsibility**\n\n- Use a Switch for settings that take effect immediately; use a Checkbox inside forms that need a submit.\n- The label should name the setting ("Wi-Fi"), not the state ("On").',
       },
     },
   },

@@ -93,6 +93,50 @@ describe('RadioGroup', () => {
     await expect(r[0]!.trigger('keydown', { key: 'ArrowDown' })).resolves.not.toThrow()
   })
 
+  it('tracks a Radio whose value prop changes', async () => {
+    const second = ref('b')
+    const value = ref<string>()
+    const w = renderTemplate(
+      `<RadioGroup v-model="value" label="P"><Radio value="a">A</Radio><Radio :value="second">B</Radio></RadioGroup>`,
+      C,
+      () => ({ value, second }),
+    )
+    second.value = 'z'
+    value.value = 'z'
+    await nextTick()
+    await nextTick()
+    const tabbable = w.findAll('[role="radio"]').filter((r) => r.attributes('tabindex') === '0')
+    expect(tabbable.map((r) => r.text())).toEqual(['B'])
+  })
+
+  it('with nothing checked, the first radio in DOM order is tabbable after a reorder', async () => {
+    const items = ref(['a', 'b'])
+    const w = renderTemplate(
+      `<RadioGroup label="P"><Radio v-for="i in items" :key="i" :value="i">{{ i }}</Radio></RadioGroup>`,
+      C,
+      () => ({ items }),
+    )
+    await nextTick()
+    items.value = ['b', 'a']
+    await nextTick()
+    await nextTick()
+    const radios = w.findAll('[role="radio"]')
+    expect(radios.map((r) => r.text())).toEqual(['b', 'a'])
+    expect(radios[0]!.attributes('tabindex')).toBe('0')
+  })
+
+  it('reacts to the disabled prop changing after mount', async () => {
+    const disabled = ref(false)
+    const w = renderTemplate(
+      `<RadioGroup label="P" :disabled="disabled"><Radio value="a">A</Radio></RadioGroup>`,
+      C,
+      () => ({ disabled }),
+    )
+    disabled.value = true
+    await nextTick()
+    expect(w.get('[role="radio"]').attributes('disabled')).toBeDefined()
+  })
+
   it('has no axe violations', async () => {
     const { w } = await group('a', true)
     expect(await axe(w.element)).toHaveNoViolations()

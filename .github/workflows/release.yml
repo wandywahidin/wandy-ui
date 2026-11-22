@@ -41,11 +41,15 @@ jobs:
       - name: Version PR or publish
         uses: changesets/action@v2
         with:
-          publish-script: pnpm -r publish --access public
+          # changeset publish runs pnpm publish per package and creates git tags,
+          # so the action can push them and open GitHub releases.
+          publish-script: pnpm changeset publish
           commit-message: 'chore: version packages'
           pr-title: 'chore: version packages'
+          # PRs opened with the default token don't trigger CI. Add an optional
+          # RELEASE_TOKEN secret (a fine-grained PAT) so the Version Packages PR runs CI.
+          github-token: ${{ secrets.RELEASE_TOKEN || github.token }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'

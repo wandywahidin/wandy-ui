@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, provide, shallowReactive, toRef, useAttrs, useId, watch } from 'vue'
+import { computed, provide, ref, toRef, useAttrs, useId, watch } from 'vue'
+import { useItemRegistry } from '../../composables/useItemRegistry'
 import { useUi } from '../../composables/useUi'
 import type { UiOverrides } from '../../types'
 import { TABS_KEY } from './context'
@@ -23,14 +24,15 @@ defineSlots<{ default?(): unknown }>()
 
 const attrs = useAttrs()
 const baseId = useId()
-const tabs = shallowReactive<Array<{ value: () => string; disabled: () => boolean }>>([])
+const root = ref<HTMLElement>()
+const { ordered: tabs, register } = useItemRegistry(root)
 
-const firstEnabled = computed(() => tabs.find((t) => !t.disabled())?.value())
+const firstEnabled = computed(() => tabs.value.find((t) => !t.disabled())?.value())
 const active = computed(() =>
-  tabs.some((t) => t.value() === model.value) ? model.value : firstEnabled.value,
+  tabs.value.some((t) => t.value() === model.value) ? model.value : firstEnabled.value,
 )
 const tabbable = computed(() => {
-  const current = tabs.find((t) => t.value() === active.value)
+  const current = tabs.value.find((t) => t.value() === active.value)
   return current && !current.disabled() ? active.value : firstEnabled.value
 })
 
@@ -42,11 +44,7 @@ provide(TABS_KEY, {
   activation: toRef(props, 'activation'),
   orientation: toRef(props, 'orientation'),
   select: (v) => (model.value = v),
-  register(value, disabled) {
-    const entry = { value, disabled }
-    tabs.push(entry)
-    return () => tabs.splice(tabs.indexOf(entry), 1)
-  },
+  register,
 })
 
 // Without a value, select the first enabled tab, also when tabs arrive after
@@ -67,5 +65,5 @@ const classes = useUi('tabs', () => ({ root: tabsVariants({ orientation: props.o
 </script>
 
 <template>
-  <div v-bind="{ ...attrs, class: undefined }" :class="classes.root"><slot /></div>
+  <div ref="root" v-bind="{ ...attrs, class: undefined }" :class="classes.root"><slot /></div>
 </template>

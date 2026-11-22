@@ -14,7 +14,7 @@ export interface FieldProps {
   error?: string
   required?: boolean
   disabled?: boolean
-  ui?: UiOverrides<'root' | 'label' | 'description' | 'error'>
+  ui?: UiOverrides<'root' | 'label' | 'required' | 'description' | 'error'>
 }
 
 const props = withDefaults(defineProps<FieldProps>(), { required: false, disabled: false })

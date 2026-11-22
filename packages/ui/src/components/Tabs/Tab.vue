@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, useAttrs } from 'vue'
+import { computed, inject, onBeforeUnmount, ref, useAttrs } from 'vue'
 import { useUi } from '../../composables/useUi'
 import type { UiOverrides } from '../../types'
 import { panelId, tabId, TABS_KEY } from './context'
@@ -21,11 +21,13 @@ if (!ctx) throw new Error('<Tab> must be used inside <Tabs>.')
 
 const attrs = useAttrs()
 const selected = computed(() => ctx.active.value === props.value)
+const el = ref<HTMLElement>()
 onBeforeUnmount(
-  ctx.register(
-    () => props.value,
-    () => props.disabled,
-  ),
+  ctx.register({
+    value: () => props.value,
+    disabled: () => props.disabled,
+    el: () => el.value,
+  }),
 )
 
 const classes = useUi(
@@ -38,6 +40,7 @@ const classes = useUi(
 <template>
   <button
     :id="tabId(ctx.baseId, value)"
+    ref="el"
     v-bind="{ ...attrs, class: undefined }"
     type="button"
     role="tab"

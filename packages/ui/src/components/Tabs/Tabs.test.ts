@@ -167,6 +167,24 @@ describe('Tabs', () => {
     expect(document.getElementById(tab.attributes('aria-controls')!)).toBe(panel.element)
   })
 
+  it('falls back to the first tab in DOM order after a reorder', async () => {
+    const items = ref(['x', 'y'])
+    const w = renderTemplate(
+      `<Tabs model-value="none"><TabList aria-label="R">
+        <Tab v-for="i in items" :key="i" :value="i">{{ i }}</Tab>
+      </TabList></Tabs>`,
+      C,
+      () => ({ items }),
+    )
+    await nextTick()
+    items.value = ['y', 'x']
+    await nextTick()
+    await nextTick()
+    const tabs = w.findAll('[role="tab"]')
+    expect(tabs.map((t) => t.text())).toEqual(['y', 'x'])
+    expect(tabs[0]!.attributes('tabindex')).toBe('0')
+  })
+
   it('has no axe violations', async () => {
     const { w } = await setup({ disableB: true })
     expect(await axe(w.element)).toHaveNoViolations()

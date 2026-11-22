@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { ref } from 'vue'
 import { axe } from 'vitest-axe'
 import { renderTemplate, settle } from '../../test-utils'
@@ -45,6 +45,25 @@ describe('Popover', () => {
     expect(open.value).toBe(false)
     expect(content()).toBeNull()
     expect(document.activeElement).toBe(trigger())
+  })
+
+  it('warns in development when the panel has no accessible name', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    renderTemplate(
+      `<Popover :open="true"><template #trigger><button>F</button></template>x</Popover>`,
+      { Popover },
+    )
+    await settle()
+    expect(warn.mock.calls.some((c) => String(c[0]).includes('Popover'))).toBe(true)
+    warn.mockRestore()
+  })
+
+  it('does not warn when labelled', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    setup()
+    await settle()
+    expect(warn.mock.calls.some((c) => String(c[0]).includes('Popover'))).toBe(false)
+    warn.mockRestore()
   })
 
   it('has no axe violations while open', async () => {

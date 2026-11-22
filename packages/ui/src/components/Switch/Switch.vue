@@ -12,6 +12,10 @@ export interface SwitchProps {
   disabled?: boolean
   invalid?: boolean
   size?: 'sm' | 'md'
+  /** Form field name. When set and checked, `value` is submitted with its form. */
+  name?: string
+  /** Submitted value while checked. Default `'on'`, like a checkbox. */
+  value?: string
   ui?: UiOverrides<'root' | 'track' | 'thumb' | 'label'>
 }
 
@@ -19,12 +23,13 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   disabled: false,
   invalid: false,
   size: 'md',
+  value: 'on',
 })
 const model = defineModel<boolean>({ default: false })
 const slots = defineSlots<{ default?(): unknown }>()
 
 const attrs = useAttrs()
-const control = useFieldControl(props)
+const control = useFieldControl(props, attrs)
 const labelId = useId()
 const rest = computed(() => ({ ...attrs, class: undefined }))
 
@@ -56,5 +61,6 @@ function toggle() {
       <span :class="classes.thumb" aria-hidden="true" />
     </button>
     <span v-if="slots.default" :id="labelId" :class="classes.label" @click="toggle"><slot /></span>
+    <input v-if="name && model && !control.disabled" type="hidden" :name="name" :value="value" />
   </span>
 </template>

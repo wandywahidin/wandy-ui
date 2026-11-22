@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 const model = defineModel<string>()
 
 const attrs = useAttrs()
-const control = useFieldControl(props)
+const control = useFieldControl(props, attrs)
 // Reka owns `disabled` on the root; the trigger gets ids and ARIA.
 const triggerAttrs = computed(() => {
   const { disabled: _disabled, ...rest } = control.value
