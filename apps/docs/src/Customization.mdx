@@ -19,7 +19,7 @@ There are five layers, from coarse to fine. Reach for the coarsest one that does
 ## 1. Tokens
 
 ```css
-/* after @import "@wandy/tokens/theme.css" */
+/* after @import "@wandy29/tokens/theme.css" */
 :root {
   --wui-primary: #0f766e;
   --wui-ring: #0f766e;
@@ -47,7 +47,7 @@ Every component exports its [tailwind-variants](https://www.tailwind-variants.or
 ```ts
 // brand.ts
 import { tv } from 'tailwind-variants'
-import { buttonVariants } from '@wandy/ui'
+import { buttonVariants } from '@wandy29/ui'
 
 export const heroButton = tv({
   extend: buttonVariants,
@@ -87,7 +87,7 @@ Every component has named parts (slots). `ui` takes a class string per part. `cl
 ## 4. Global defaults
 
 ```ts
-import { createUI } from '@wandy/ui'
+import { createUI } from '@wandy29/ui'
 
 app.use(
   createUI({
@@ -129,7 +129,7 @@ When classes aren't enough, replace markup:
 `useUi`, `cn`, `useFieldControl`, and `useRovingFocus` are exported, so a custom control can join the same system: it can merge classes the same way, pick up a surrounding `Field`'s ids and error state, and get roving arrow-key focus.
 
 ```ts
-import { useFieldControl, useUi } from '@wandy/ui'
+import { useFieldControl, useUi } from '@wandy29/ui'
 
 const control = useFieldControl(props) // { id, 'aria-describedby'?, 'aria-invalid'?, disabled?, required? }
 ```

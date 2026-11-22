@@ -1,8 +1,8 @@
-# @wandy/ui
+# @wandy29/ui
 
 [![CI](https://github.com/wandywahidin/wandy-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/wandywahidin/wandy-ui/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@wandy/ui.svg)](https://www.npmjs.com/package/@wandy/ui)
-[![tokens](https://img.shields.io/npm/v/@wandy/tokens.svg?label=%40wandy%2Ftokens)](https://www.npmjs.com/package/@wandy/tokens)
+[![npm](https://img.shields.io/npm/v/@wandy29/ui.svg)](https://www.npmjs.com/package/@wandy29/ui)
+[![tokens](https://img.shields.io/npm/v/@wandy29/tokens.svg?label=%40wandy29%2Ftokens)](https://www.npmjs.com/package/@wandy29/tokens)
 
 **Accessible, customizable Vue 3.5 components styled with Tailwind CSS v4.**
 
@@ -21,20 +21,20 @@ Every component ships with axe tests for every state, keyboard tests in a real b
 ## Quick start
 
 ```sh
-pnpm add @wandy/ui @wandy/tokens reka-ui
+pnpm add @wandy29/ui @wandy29/tokens reka-ui
 ```
 
 ```css
 /* src/style.css */
 @import "tailwindcss";
-@import "@wandy/tokens/theme.css";
-@source "../node_modules/@wandy/ui/src";
+@import "@wandy29/tokens/theme.css";
+@source "../node_modules/@wandy29/ui/src";
 ```
 
 ```ts
 // src/main.ts
 import { createApp } from 'vue'
-import { createUI } from '@wandy/ui'
+import { createUI } from '@wandy29/ui'
 import App from './App.vue'
 import './style.css'
 
@@ -44,7 +44,7 @@ createApp(App).use(createUI()).mount('#app')
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button, Field, Input } from '@wandy/ui'
+import { Button, Field, Input } from '@wandy29/ui'
 const email = ref('')
 </script>
 

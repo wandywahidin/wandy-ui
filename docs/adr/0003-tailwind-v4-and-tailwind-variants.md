@@ -13,7 +13,7 @@ Components need a styling approach that:
 
 ## Decision
 
-- **Tailwind CSS v4** with CSS-first configuration. `@wandy/tokens` emits runtime variables (`--wui-*`) for `:root` and `.dark`, plus a `@theme inline` block that maps Tailwind utilities onto them (`--color-primary: var(--wui-primary)`).
+- **Tailwind CSS v4** with CSS-first configuration. `@wandy29/tokens` emits runtime variables (`--wui-*`) for `:root` and `.dark`, plus a `@theme inline` block that maps Tailwind utilities onto them (`--color-primary: var(--wui-primary)`).
 - **[tailwind-variants](https://www.tailwind-variants.org)** (`tv()`) for variant and slot definitions. Each component exports its definition (`buttonVariants`, …) so consumers can `extend` it.
 - **[tailwind-merge](https://github.com/dcastil/tailwind-merge)** in a single `useUi` composable. It merges classes in a fixed order (component default < global default < `ui` prop / `class`), so later layers _replace_ conflicting utilities instead of depending on CSS order.
 

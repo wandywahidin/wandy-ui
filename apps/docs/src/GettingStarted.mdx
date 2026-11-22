@@ -13,7 +13,7 @@ import { Meta } from '@storybook/addon-docs/blocks'
 ## Install
 
 ```sh
-pnpm add @wandy/ui @wandy/tokens reka-ui
+pnpm add @wandy29/ui @wandy29/tokens reka-ui
 # if your app doesn't have them yet:
 pnpm add vue tailwindcss @tailwindcss/vite
 ```
@@ -24,11 +24,11 @@ In your app's main stylesheet (for example `src/style.css`):
 
 ```css
 @import "tailwindcss";
-@import "@wandy/tokens/theme.css";
-@source "../node_modules/@wandy/ui/src";
+@import "@wandy29/tokens/theme.css";
+@source "../node_modules/@wandy29/ui/src";
 ```
 
-- `@wandy/tokens/theme.css` defines the color, radius, and font tokens and maps them to Tailwind utilities such as `bg-primary`.
+- `@wandy29/tokens/theme.css` defines the color, radius, and font tokens and maps them to Tailwind utilities such as `bg-primary`.
 - `@source` tells Tailwind to scan the component source for class names. The path is relative to this CSS file, so adjust it if your stylesheet sits deeper than `src/`.
 
 ## Install the plugin
@@ -36,7 +36,7 @@ In your app's main stylesheet (for example `src/style.css`):
 ```ts
 // src/main.ts
 import { createApp } from 'vue'
-import { createUI } from '@wandy/ui'
+import { createUI } from '@wandy29/ui'
 import App from './App.vue'
 import './style.css'
 
@@ -48,7 +48,7 @@ createApp(App).use(createUI()).mount('#app')
 To register every component globally instead of importing them, use `WandyUI`. It takes the same config, plus an optional name `prefix`:
 
 ```ts
-import { WandyUI } from '@wandy/ui'
+import { WandyUI } from '@wandy29/ui'
 
 app.use(WandyUI, { prefix: 'W' }) // <WButton>, <WDialog>, …
 ```
@@ -60,7 +60,7 @@ Named imports tree-shake; global registration ships every component.
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button, Field, Input } from '@wandy/ui'
+import { Button, Field, Input } from '@wandy29/ui'
 
 const email = ref('')
 </script>

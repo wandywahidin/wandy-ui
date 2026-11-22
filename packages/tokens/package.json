@@ -1,5 +1,5 @@
 {
-  "name": "@wandy/tokens",
+  "name": "@wandy29/tokens",
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
@@ -18,7 +18,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "Design tokens and Tailwind v4 theme.css for @wandy/ui",
+  "description": "Design tokens and Tailwind v4 theme.css for @wandy29/ui",
   "exports": {
     "./theme.css": "./dist/theme.css",
     "./package.json": "./package.json"

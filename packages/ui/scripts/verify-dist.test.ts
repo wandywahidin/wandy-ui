@@ -11,7 +11,7 @@ function files(dir: string): string[] {
   })
 }
 
-// Runs against the built package: `pnpm --filter @wandy/ui build && pnpm --filter @wandy/ui test:dist`.
+// Runs against the built package: `pnpm --filter @wandy29/ui build && pnpm --filter @wandy29/ui test:dist`.
 describe('dist', () => {
   it('exists with a type entry', () => {
     expect(existsSync(join(dist, 'index.js'))).toBe(true)

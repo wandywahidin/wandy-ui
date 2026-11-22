@@ -14,7 +14,7 @@ The library will be reused across several of the author's own projects, so fixes
 
 ## Decision
 
-Ship `@wandy/ui` and `@wandy/tokens` as **npm packages**, versioned with semver and Changesets. Instead of editing copied source, consumers customize through five supported layers: tokens, variant `extend`, the `ui` prop and `class`, global defaults via `createUI`, and slots.
+Ship `@wandy29/ui` and `@wandy29/tokens` as **npm packages**, versioned with semver and Changesets. Instead of editing copied source, consumers customize through five supported layers: tokens, variant `extend`, the `ui` prop and `class`, global defaults via `createUI`, and slots.
 
 ## Alternatives
 

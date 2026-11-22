@@ -232,10 +232,10 @@ importers:
       '@vitest/browser-playwright':
         specifier: 5.1.1
         version: 5.1.1(playwright@1.65.1)(vite@8.3.8(@types/node@22.20.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))(vitest@5.1.1)
-      '@wandy/tokens':
+      '@wandy29/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
-      '@wandy/ui':
+      '@wandy29/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       playwright:

@@ -52,7 +52,7 @@ jobs:
         run: pnpm build
 
       - name: Verify library dist
-        run: pnpm --filter @wandy/ui test:dist
+        run: pnpm --filter @wandy29/ui test:dist
 
       - name: Build Storybook
         run: pnpm --filter docs build-storybook
