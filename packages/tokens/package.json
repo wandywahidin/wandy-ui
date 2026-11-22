@@ -3,6 +3,15 @@
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wandywahidin/wandy-ui.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://wandywahidin.github.io/wandy-ui/",
+  "bugs": {
+    "url": "https://github.com/wandywahidin/wandy-ui/issues"
+  },
   "sideEffects": [
     "*.css"
   ],

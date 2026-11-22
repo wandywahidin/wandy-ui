@@ -5,6 +5,15 @@
   "type": "module",
   "sideEffects": false,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wandywahidin/wandy-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://wandywahidin.github.io/wandy-ui/",
+  "bugs": {
+    "url": "https://github.com/wandywahidin/wandy-ui/issues"
+  },
   "keywords": [
     "vue",
     "vue3",

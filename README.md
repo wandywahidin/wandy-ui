@@ -1,6 +1,6 @@
 # @wandy/ui
 
-[![CI](https://github.com/<github-user>/<repo>/actions/workflows/ci.yml/badge.svg)](https://github.com/<github-user>/<repo>/actions/workflows/ci.yml)
+[![CI](https://github.com/wandywahidin/wandy-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/wandywahidin/wandy-ui/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@wandy/ui.svg)](https://www.npmjs.com/package/@wandy/ui)
 [![tokens](https://img.shields.io/npm/v/@wandy/tokens.svg?label=%40wandy%2Ftokens)](https://www.npmjs.com/package/@wandy/tokens)
 
@@ -8,7 +8,7 @@
 
 Every component ships with axe tests for every state, keyboard tests in a real browser, an Accessibility section in its docs, and named parts you can restyle without `!important`.
 
-**Live docs and playground:** https://&lt;github-user&gt;.github.io/&lt;repo&gt;/
+**Live docs and playground:** https://wandywahidin.github.io/wandy-ui/
 
 |                   |                                                                                                                                  |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------- |
